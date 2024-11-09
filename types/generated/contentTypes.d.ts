@@ -647,13 +647,15 @@ export interface ApiChapterChapter extends Struct.CollectionTypeSchema {
       'api::user-progress.user-progress'
     >;
     attachment: Schema.Attribute.Component<'chapter.attachment', true>;
-    video: Schema.Attribute.DynamicZone<
-      ['chapter.live-session', 'chapter.recorded-video']
-    >;
+    video: Schema.Attribute.DynamicZone<['chapter.live-session']>;
     course: Schema.Attribute.Relation<'manyToOne', 'api::course.course'>;
     quiz: Schema.Attribute.Component<'quiz.quiz', false>;
     chapterSlug: Schema.Attribute.UID<'title'>;
     shortdescription: Schema.Attribute.String & Schema.Attribute.Required;
+    mux_video: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::mux-video-uploader.mux-asset'
+    >;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -703,6 +705,33 @@ export interface ApiCourseCourse extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::course.course'>;
+  };
+}
+
+export interface ApiLessonLesson extends Struct.CollectionTypeSchema {
+  collectionName: 'lessons';
+  info: {
+    singularName: 'lesson';
+    pluralName: 'lessons';
+    displayName: 'Lesson';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    mux_video_uploader_mux_asset: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::mux-video-uploader.mux-asset'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::lesson.lesson'>;
   };
 }
 
@@ -1192,6 +1221,7 @@ declare module '@strapi/strapi' {
       'api::category.category': ApiCategoryCategory;
       'api::chapter.chapter': ApiChapterChapter;
       'api::course.course': ApiCourseCourse;
+      'api::lesson.lesson': ApiLessonLesson;
       'api::purchase.purchase': ApiPurchasePurchase;
       'api::teacher.teacher': ApiTeacherTeacher;
       'api::user-progress.user-progress': ApiUserProgressUserProgress;

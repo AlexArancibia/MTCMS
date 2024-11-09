@@ -54,6 +54,10 @@ export interface ChapterRecordedVideo extends Struct.ComponentSchema {
     videoUrl: Schema.Attribute.String;
     playbackId: Schema.Attribute.String;
     recordedVideo: Schema.Attribute.Media<'files' | 'videos'>;
+    mux_video_uploader_mux_asset: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::mux-video-uploader.mux-asset'
+    >;
   };
 }
 

@@ -44,8 +44,7 @@
     "video": {
       "type": "dynamiczone",
       "components": [
-        "chapter.live-session",
-        "chapter.recorded-video"
+        "chapter.live-session"
       ],
       "required": false
     },
@@ -67,6 +66,11 @@
     "shortdescription": {
       "type": "string",
       "required": true
+    },
+    "mux_video": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::mux-video-uploader.mux-asset"
     }
   }
 }
