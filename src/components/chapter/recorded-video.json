@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_chapter_recorded_videos",
+  "info": {
+    "displayName": "RecordedVideo",
+    "icon": "volumeUp",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "videoUrl": {
+      "type": "string"
+    },
+    "playbackId": {
+      "type": "string"
+    },
+    "recordedVideo": {
+      "allowedTypes": [
+        "files",
+        "videos"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}

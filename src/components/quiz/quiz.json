@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_quiz_quizzes",
+  "info": {
+    "displayName": "Quiz",
+    "icon": "lightbulb"
+  },
+  "options": {},
+  "attributes": {
+    "question": {
+      "type": "component",
+      "repeatable": true,
+      "component": "quiz.question"
+    }
+  }
+}

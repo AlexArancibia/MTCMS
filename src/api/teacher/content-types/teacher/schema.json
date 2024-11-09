@@ -1,0 +1,60 @@
+{
+  "kind": "collectionType",
+  "collectionName": "teachers",
+  "info": {
+    "singularName": "teacher",
+    "pluralName": "teachers",
+    "displayName": "Teacher",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "titulo": {
+      "type": "string",
+      "required": true
+    },
+    "biography": {
+      "type": "text",
+      "required": true
+    },
+    "country": {
+      "type": "enumeration",
+      "enum": [
+        "Peru",
+        "Ecuador",
+        "Colombia",
+        "Chile"
+      ],
+      "required": true,
+      "default": "Peru"
+    },
+    "photo": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "linkedin": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "courses": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::course.course",
+      "mappedBy": "teacher"
+    }
+  }
+}

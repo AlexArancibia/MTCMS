@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_quiz_questions",
+  "info": {
+    "displayName": "question",
+    "icon": "question",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "content": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "answer": {
+      "type": "component",
+      "repeatable": true,
+      "component": "quiz.answer"
+    }
+  }
+}

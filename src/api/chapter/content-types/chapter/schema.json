@@ -1,0 +1,72 @@
+{
+  "kind": "collectionType",
+  "collectionName": "chapters",
+  "info": {
+    "singularName": "chapter",
+    "pluralName": "chapters",
+    "displayName": "Chapter",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "content": {
+      "type": "blocks"
+    },
+    "position": {
+      "type": "integer",
+      "required": true,
+      "unique": false,
+      "default": 1
+    },
+    "isFree": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "user_progresses": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::user-progress.user-progress",
+      "mappedBy": "chapter"
+    },
+    "attachment": {
+      "type": "component",
+      "repeatable": true,
+      "component": "chapter.attachment"
+    },
+    "video": {
+      "type": "dynamiczone",
+      "components": [
+        "chapter.live-session",
+        "chapter.recorded-video"
+      ],
+      "required": false
+    },
+    "course": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::course.course",
+      "inversedBy": "chapter"
+    },
+    "quiz": {
+      "type": "component",
+      "repeatable": false,
+      "component": "quiz.quiz"
+    },
+    "chapterSlug": {
+      "type": "uid",
+      "targetField": "title"
+    },
+    "shortdescription": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

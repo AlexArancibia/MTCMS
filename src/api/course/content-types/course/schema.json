@@ -13,35 +13,61 @@
   "pluginOptions": {},
   "attributes": {
     "title": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "description": {
       "type": "text"
     },
-    "isPremium": {
-      "type": "boolean",
-      "default": false
-    },
-    "slug": {
-      "type": "uid",
-      "targetField": "title"
-    },
     "image": {
       "type": "media",
       "multiple": false,
-      "required": false,
+      "required": true,
       "allowedTypes": [
-        "images"
+        "images",
+        "files"
       ]
     },
-    "lessons": {
+    "price": {
+      "type": "float",
+      "required": true
+    },
+    "purchases": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::lesson.lesson",
+      "target": "api::purchase.purchase",
       "mappedBy": "course"
     },
-    "content": {
-      "type": "richtext"
+    "titleSlug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true
+    },
+    "chapter": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::chapter.chapter",
+      "mappedBy": "course"
+    },
+    "category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::category.category",
+      "inversedBy": "courses"
+    },
+    "modality": {
+      "type": "enumeration",
+      "enum": [
+        "Virtual Mixto",
+        "En Vivo",
+        "On Demand"
+      ]
+    },
+    "teacher": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::teacher.teacher",
+      "inversedBy": "courses"
     }
   }
 }
