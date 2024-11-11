@@ -64,7 +64,30 @@
       "target": "plugin::users-permissions.role",
       "inversedBy": "users",
       "configurable": false
+    },
+    "purchase": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::purchase.purchase",
+      "mappedBy": "users_permissions_user"
+    },
+    "user_progresses": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::user-progress.user-progress",
+      "mappedBy": "users_permissions_user"
+    },
+    "courses": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::course.course",
+      "mappedBy": "users_permissions_users"
+    },
+    "certificate": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::certificate.certificate",
+      "mappedBy": "users_permissions_user"
     }
-
   }
 }

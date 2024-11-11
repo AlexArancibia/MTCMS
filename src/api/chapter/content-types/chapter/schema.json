@@ -17,7 +17,8 @@
       "required": true
     },
     "content": {
-      "type": "blocks"
+      "type": "blocks",
+      "required": true
     },
     "position": {
       "type": "integer",
@@ -41,13 +42,6 @@
       "repeatable": true,
       "component": "chapter.attachment"
     },
-    "video": {
-      "type": "dynamiczone",
-      "components": [
-        "chapter.live-session"
-      ],
-      "required": false
-    },
     "course": {
       "type": "relation",
       "relation": "manyToOne",
@@ -61,16 +55,29 @@
     },
     "chapterSlug": {
       "type": "uid",
-      "targetField": "title"
+      "targetField": "title",
+      "required": true
     },
     "shortdescription": {
       "type": "string",
       "required": true
     },
-    "mux_video": {
+    "recorded_video": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "plugin::mux-video-uploader.mux-asset"
+    },
+    "liveSessionUrl": {
+      "type": "string"
+    },
+    "platform": {
+      "type": "enumeration",
+      "enum": [
+        "Webex",
+        "Cisco",
+        "Zoom",
+        "Meet"
+      ]
     }
   }
 }

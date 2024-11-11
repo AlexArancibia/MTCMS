@@ -575,6 +575,16 @@ export interface PluginUsersPermissionsUser
       'manyToOne',
       'plugin::users-permissions.role'
     >;
+    purchase: Schema.Attribute.Relation<'oneToOne', 'api::purchase.purchase'>;
+    user_progresses: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::user-progress.user-progress'
+    >;
+    courses: Schema.Attribute.Relation<'manyToMany', 'api::course.course'>;
+    certificate: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::certificate.certificate'
+    >;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -622,6 +632,39 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiCertificateCertificate extends Struct.CollectionTypeSchema {
+  collectionName: 'certificates';
+  info: {
+    singularName: 'certificate';
+    pluralName: 'certificates';
+    displayName: 'Certificate';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    course: Schema.Attribute.Relation<'manyToOne', 'api::course.course'>;
+    users_permissions_user: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    finished_date: Schema.Attribute.Date;
+    qualification: Schema.Attribute.Integer;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::certificate.certificate'
+    >;
+  };
+}
+
 export interface ApiChapterChapter extends Struct.CollectionTypeSchema {
   collectionName: 'chapters';
   info: {
@@ -635,7 +678,7 @@ export interface ApiChapterChapter extends Struct.CollectionTypeSchema {
   };
   attributes: {
     title: Schema.Attribute.String & Schema.Attribute.Required;
-    content: Schema.Attribute.Blocks;
+    content: Schema.Attribute.Blocks & Schema.Attribute.Required;
     position: Schema.Attribute.Integer &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<1>;
@@ -647,15 +690,16 @@ export interface ApiChapterChapter extends Struct.CollectionTypeSchema {
       'api::user-progress.user-progress'
     >;
     attachment: Schema.Attribute.Component<'chapter.attachment', true>;
-    video: Schema.Attribute.DynamicZone<['chapter.live-session']>;
     course: Schema.Attribute.Relation<'manyToOne', 'api::course.course'>;
     quiz: Schema.Attribute.Component<'quiz.quiz', false>;
-    chapterSlug: Schema.Attribute.UID<'title'>;
+    chapterSlug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
     shortdescription: Schema.Attribute.String & Schema.Attribute.Required;
-    mux_video: Schema.Attribute.Relation<
+    recorded_video: Schema.Attribute.Relation<
       'oneToOne',
       'plugin::mux-video-uploader.mux-asset'
     >;
+    liveSessionUrl: Schema.Attribute.String;
+    platform: Schema.Attribute.Enumeration<['Webex', 'Cisco', 'Zoom', 'Meet']>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -688,14 +732,23 @@ export interface ApiCourseCourse extends Struct.CollectionTypeSchema {
     image: Schema.Attribute.Media<'images' | 'files'> &
       Schema.Attribute.Required;
     price: Schema.Attribute.Float & Schema.Attribute.Required;
-    purchases: Schema.Attribute.Relation<'oneToMany', 'api::purchase.purchase'>;
     titleSlug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
     chapter: Schema.Attribute.Relation<'oneToMany', 'api::chapter.chapter'>;
     category: Schema.Attribute.Relation<'manyToOne', 'api::category.category'>;
     modality: Schema.Attribute.Enumeration<
       ['Virtual Mixto', 'En Vivo', 'On Demand']
-    >;
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'Virtual Mixto'>;
     teacher: Schema.Attribute.Relation<'manyToOne', 'api::teacher.teacher'>;
+    users_permissions_users: Schema.Attribute.Relation<
+      'manyToMany',
+      'plugin::users-permissions.user'
+    >;
+    certificates: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::certificate.certificate'
+    >;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -705,33 +758,6 @@ export interface ApiCourseCourse extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::course.course'>;
-  };
-}
-
-export interface ApiLessonLesson extends Struct.CollectionTypeSchema {
-  collectionName: 'lessons';
-  info: {
-    singularName: 'lesson';
-    pluralName: 'lessons';
-    displayName: 'Lesson';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    mux_video_uploader_mux_asset: Schema.Attribute.Relation<
-      'oneToOne',
-      'plugin::mux-video-uploader.mux-asset'
-    >;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::lesson.lesson'>;
   };
 }
 
@@ -750,8 +776,10 @@ export interface ApiPurchasePurchase extends Struct.CollectionTypeSchema {
     purchaseId: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
-    userId: Schema.Attribute.String & Schema.Attribute.Required;
-    course: Schema.Attribute.Relation<'manyToOne', 'api::course.course'>;
+    users_permissions_user: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -821,11 +849,15 @@ export interface ApiUserProgressUserProgress
     draftAndPublish: true;
   };
   attributes: {
-    userId: Schema.Attribute.String & Schema.Attribute.Required;
     isCompleted: Schema.Attribute.Boolean &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<false>;
     chapter: Schema.Attribute.Relation<'manyToOne', 'api::chapter.chapter'>;
+    users_permissions_user: Schema.Attribute.Relation<
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+    quiz_attempt: Schema.Attribute.DynamicZone<['quiz.attempt']>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -1219,9 +1251,9 @@ declare module '@strapi/strapi' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::category.category': ApiCategoryCategory;
+      'api::certificate.certificate': ApiCertificateCertificate;
       'api::chapter.chapter': ApiChapterChapter;
       'api::course.course': ApiCourseCourse;
-      'api::lesson.lesson': ApiLessonLesson;
       'api::purchase.purchase': ApiPurchasePurchase;
       'api::teacher.teacher': ApiTeacherTeacher;
       'api::user-progress.user-progress': ApiUserProgressUserProgress;

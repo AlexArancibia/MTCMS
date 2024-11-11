@@ -17,15 +17,11 @@
       "required": true,
       "unique": true
     },
-    "userId": {
-      "type": "string",
-      "required": true
-    },
-    "course": {
+    "users_permissions_user": {
       "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::course.course",
-      "inversedBy": "purchases"
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "purchase"
     }
   }
 }

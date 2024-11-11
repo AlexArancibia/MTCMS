@@ -32,12 +32,6 @@
       "type": "float",
       "required": true
     },
-    "purchases": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::purchase.purchase",
-      "mappedBy": "course"
-    },
     "titleSlug": {
       "type": "uid",
       "targetField": "title",
@@ -61,13 +55,27 @@
         "Virtual Mixto",
         "En Vivo",
         "On Demand"
-      ]
+      ],
+      "required": true,
+      "default": "Virtual Mixto"
     },
     "teacher": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::teacher.teacher",
       "inversedBy": "courses"
+    },
+    "users_permissions_users": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "courses"
+    },
+    "certificates": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::certificate.certificate",
+      "mappedBy": "course"
     }
   }
 }

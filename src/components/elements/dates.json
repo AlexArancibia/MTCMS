@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_elements_dates",
+  "info": {
+    "displayName": "dates",
+    "icon": "calendar"
+  },
+  "options": {},
+  "attributes": {
+    "start_date": {
+      "type": "date"
+    },
+    "finish_date": {
+      "type": "date"
+    }
+  }
+}
