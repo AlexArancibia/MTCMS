@@ -745,6 +745,7 @@ export interface ApiCourseCourse extends Struct.CollectionTypeSchema {
       'manyToMany',
       'plugin::users-permissions.user'
     >;
+    purchase: Schema.Attribute.Relation<'oneToMany', 'api::purchase.purchase'>;
     certificates: Schema.Attribute.Relation<
       'oneToMany',
       'api::certificate.certificate'
@@ -780,6 +781,7 @@ export interface ApiPurchasePurchase extends Struct.CollectionTypeSchema {
       'oneToOne',
       'plugin::users-permissions.user'
     >;
+    course: Schema.Attribute.Relation<'manyToOne', 'api::course.course'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;

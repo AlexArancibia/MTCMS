@@ -26,7 +26,7 @@
     "course": {
       "type": "relation",
       "relation": "manyToOne",
-      "target": "plugin::course.course",
+      "target": "api::course.course",
       "inversedBy": "purchase"
     }
   }

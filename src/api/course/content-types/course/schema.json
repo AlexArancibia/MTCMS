@@ -74,8 +74,8 @@
     "purchase": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "plugin::purchase.purchase",
-      "inversedBy": "courses"
+      "target": "api::purchase.purchase",
+      "mappedBy": "course"
     },
     "certificates": {
       "type": "relation",
