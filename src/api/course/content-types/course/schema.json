@@ -71,6 +71,12 @@
       "target": "plugin::users-permissions.user",
       "inversedBy": "courses"
     },
+    "purchase": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "plugin::purchase.purchase",
+      "inversedBy": "courses"
+    },
     "certificates": {
       "type": "relation",
       "relation": "oneToMany",
