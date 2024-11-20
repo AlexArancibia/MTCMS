@@ -12,11 +12,7 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "purchaseId": {
-      "type": "string",
-      "required": true,
-      "unique": true
-    },
+ 
     "users_permissions_user": {
       "type": "relation",
       "relation": "oneToOne",
