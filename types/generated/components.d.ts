@@ -1,31 +1,5 @@
 import type { Struct, Schema } from '@strapi/strapi';
 
-export interface ElementsPublicPlayer extends Struct.ComponentSchema {
-  collectionName: 'components_elements_public_players';
-  info: {
-    displayName: 'Public Player';
-    description: '';
-  };
-  attributes: {
-    videoId: Schema.Attribute.String;
-    videoUrl: Schema.Attribute.String;
-    timecode: Schema.Attribute.Integer;
-    title: Schema.Attribute.String;
-  };
-}
-
-export interface ElementsDates extends Struct.ComponentSchema {
-  collectionName: 'components_elements_dates';
-  info: {
-    displayName: 'dates';
-    icon: 'calendar';
-  };
-  attributes: {
-    start_date: Schema.Attribute.Date;
-    finish_date: Schema.Attribute.Date;
-  };
-}
-
 export interface QuizQuiz extends Struct.ComponentSchema {
   collectionName: 'components_quiz_quizzes';
   info: {
@@ -81,6 +55,32 @@ export interface QuizAnswer extends Struct.ComponentSchema {
   };
 }
 
+export interface ElementsPublicPlayer extends Struct.ComponentSchema {
+  collectionName: 'components_elements_public_players';
+  info: {
+    displayName: 'Public Player';
+    description: '';
+  };
+  attributes: {
+    videoId: Schema.Attribute.String;
+    videoUrl: Schema.Attribute.String;
+    timecode: Schema.Attribute.Integer;
+    title: Schema.Attribute.String;
+  };
+}
+
+export interface ElementsDates extends Struct.ComponentSchema {
+  collectionName: 'components_elements_dates';
+  info: {
+    displayName: 'dates';
+    icon: 'calendar';
+  };
+  attributes: {
+    start_date: Schema.Attribute.Date;
+    finish_date: Schema.Attribute.Date;
+  };
+}
+
 export interface ChapterRecordedVideo extends Struct.ComponentSchema {
   collectionName: 'components_chapter_recorded_videos';
   info: {
@@ -129,12 +129,12 @@ export interface ChapterAttachment extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
-      'elements.public-player': ElementsPublicPlayer;
-      'elements.dates': ElementsDates;
       'quiz.quiz': QuizQuiz;
       'quiz.question': QuizQuestion;
       'quiz.attempt': QuizAttempt;
       'quiz.answer': QuizAnswer;
+      'elements.public-player': ElementsPublicPlayer;
+      'elements.dates': ElementsDates;
       'chapter.recorded-video': ChapterRecordedVideo;
       'chapter.live-session': ChapterLiveSession;
       'chapter.attachment': ChapterAttachment;
