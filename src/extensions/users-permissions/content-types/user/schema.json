@@ -65,12 +65,6 @@
       "inversedBy": "users",
       "configurable": false
     },
-    "purchase": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::purchase.purchase",
-      "mappedBy": "users_permissions_user"
-    },
     "user_progresses": {
       "type": "relation",
       "relation": "oneToMany",

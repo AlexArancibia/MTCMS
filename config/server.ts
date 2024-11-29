@@ -5,5 +5,4 @@ export default ({ env }) => ({
   app: {
     keys: env.array('APP_KEYS'),
   },
-  url:'https://humble-boat-e900a8f80d.strapiapp.com'
 });

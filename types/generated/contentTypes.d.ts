@@ -575,7 +575,6 @@ export interface PluginUsersPermissionsUser
       'manyToOne',
       'plugin::users-permissions.role'
     >;
-    purchase: Schema.Attribute.Relation<'oneToOne', 'api::purchase.purchase'>;
     user_progresses: Schema.Attribute.Relation<
       'oneToMany',
       'api::user-progress.user-progress'
@@ -745,11 +744,11 @@ export interface ApiCourseCourse extends Struct.CollectionTypeSchema {
       'manyToMany',
       'plugin::users-permissions.user'
     >;
-    purchase: Schema.Attribute.Relation<'oneToMany', 'api::purchase.purchase'>;
     certificates: Schema.Attribute.Relation<
       'oneToMany',
       'api::certificate.certificate'
     >;
+    info: Schema.Attribute.Blocks;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -759,41 +758,6 @@ export interface ApiCourseCourse extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::course.course'>;
-  };
-}
-
-export interface ApiPurchasePurchase extends Struct.CollectionTypeSchema {
-  collectionName: 'purchases';
-  info: {
-    singularName: 'purchase';
-    pluralName: 'purchases';
-    displayName: 'Purchase';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    purchaseId: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.Unique;
-    users_permissions_user: Schema.Attribute.Relation<
-      'oneToOne',
-      'plugin::users-permissions.user'
-    >;
-    course: Schema.Attribute.Relation<'manyToOne', 'api::course.course'>;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::purchase.purchase'
-    >;
   };
 }
 
@@ -1256,7 +1220,6 @@ declare module '@strapi/strapi' {
       'api::certificate.certificate': ApiCertificateCertificate;
       'api::chapter.chapter': ApiChapterChapter;
       'api::course.course': ApiCourseCourse;
-      'api::purchase.purchase': ApiPurchasePurchase;
       'api::teacher.teacher': ApiTeacherTeacher;
       'api::user-progress.user-progress': ApiUserProgressUserProgress;
       'admin::permission': AdminPermission;
