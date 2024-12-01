@@ -14,23 +14,21 @@
     "resolveJsonModule": true,
     "noEmitOnError": true,
     "noImplicitThis": true,
-    "outDir": "dist",
-    "rootDir": "."
+    "outDir": "./dist",  // Asegúrate de que el directorio de salida sea correcto
+    "rootDir": "./src"   // Apuntar al directorio de tu código fuente
   },
   "include": [
-    "./",
-    "./**/*.ts",
-    "./**/*.js",
-    "src/**/*.json"
+    "src/**/*.ts",       // Solo incluir archivos .ts en la carpeta src
+    "src/**/*.js",       // Incluir archivos JavaScript si es necesario
+    "src/**/*.json"      // Incluir archivos JSON si es necesario
   ],
   "exclude": [
-    "node_modules/",
-    "build/",
-    "dist/",
-    ".cache/",
-    ".tmp/",
-    "src/admin/",
-    "**/*.test.*",
-    "src/plugins/**"
+    "node_modules/",     // Excluir node_modules
+    "dist/",             // Excluir la carpeta dist (se genera automáticamente)
+    ".cache/",           // Excluir la carpeta .cache
+    ".tmp/",             // Excluir la carpeta .tmp
+    "src/admin/",        // Excluir la carpeta admin si la tienes
+    "**/*.test.*",       // Excluir archivos de pruebas
+    "src/plugins/**"     // Excluir plugins si no los necesitas
   ]
 }
