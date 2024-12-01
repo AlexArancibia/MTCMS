@@ -5,7 +5,7 @@
   "description": "A Strapi application",
   "scripts": {
     "develop": "strapi develop",
-    "start": "NODE_OPTIONS=--max_old_space_size=4096 npm run build && strapi start",
+    "start": "strapi start",
     "build": "strapi build",
     "strapi": "strapi",
     "deploy": "strapi deploy"
