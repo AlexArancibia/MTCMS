@@ -23,12 +23,14 @@
     "src/**/*.json"      // Incluir archivos JSON si es necesario
   ],
   "exclude": [
-    "node_modules/",     // Excluir node_modules
-    "dist/",             // Excluir la carpeta dist (se genera automáticamente)
-    ".cache/",           // Excluir la carpeta .cache
-    ".tmp/",             // Excluir la carpeta .tmp
-    "src/admin/",        // Excluir la carpeta admin si la tienes
-    "**/*.test.*",       // Excluir archivos de pruebas
-    "src/plugins/**"     // Excluir plugins si no los necesitas
+    "node_modules/",
+    "build/",
+    "dist/",
+    ".cache/",
+    ".tmp/",
+    "src/admin/",
+    "**/*.test.ts",
+    "src/plugins/**",
+    "types/generated/**"
   ]
 }
