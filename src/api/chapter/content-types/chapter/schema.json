@@ -42,12 +42,6 @@
       "repeatable": true,
       "component": "chapter.attachment"
     },
-    "course": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::course.course",
-      "inversedBy": "chapter"
-    },
     "quiz": {
       "type": "component",
       "repeatable": false,
@@ -73,6 +67,12 @@
         "Zoom",
         "Meet"
       ]
+    },
+    "course": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::course.course",
+      "inversedBy": "chapters"
     }
   }
 }

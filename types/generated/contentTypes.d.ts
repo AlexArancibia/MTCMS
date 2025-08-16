@@ -586,12 +586,12 @@ export interface ApiChapterChapter extends Struct.CollectionTypeSchema {
       'api::user-progress.user-progress'
     >;
     attachment: Schema.Attribute.Component<'chapter.attachment', true>;
-    course: Schema.Attribute.Relation<'manyToOne', 'api::course.course'>;
     quiz: Schema.Attribute.Component<'quiz.quiz', false>;
     chapterSlug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
     shortdescription: Schema.Attribute.String & Schema.Attribute.Required;
     liveSessionUrl: Schema.Attribute.String;
     platform: Schema.Attribute.Enumeration<['Webex', 'Cisco', 'Zoom', 'Meet']>;
+    course: Schema.Attribute.Relation<'manyToOne', 'api::course.course'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -625,7 +625,6 @@ export interface ApiCourseCourse extends Struct.CollectionTypeSchema {
       Schema.Attribute.Required;
     price: Schema.Attribute.Float & Schema.Attribute.Required;
     titleSlug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
-    chapter: Schema.Attribute.Relation<'oneToMany', 'api::chapter.chapter'>;
     category: Schema.Attribute.Relation<'manyToOne', 'api::category.category'>;
     modality: Schema.Attribute.Enumeration<
       ['Virtual Mixto', 'En Vivo', 'On Demand']
@@ -646,6 +645,7 @@ export interface ApiCourseCourse extends Struct.CollectionTypeSchema {
     finish_date: Schema.Attribute.DateTime;
     content: Schema.Attribute.Blocks & Schema.Attribute.Required;
     priceUSD: Schema.Attribute.Decimal;
+    chapters: Schema.Attribute.Relation<'oneToMany', 'api::chapter.chapter'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;

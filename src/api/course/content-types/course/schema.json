@@ -37,12 +37,6 @@
       "targetField": "title",
       "required": true
     },
-    "chapter": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::chapter.chapter",
-      "mappedBy": "course"
-    },
     "category": {
       "type": "relation",
       "relation": "manyToOne",
@@ -92,6 +86,12 @@
     },
     "priceUSD": {
       "type": "decimal"
+    },
+    "chapters": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::chapter.chapter",
+      "mappedBy": "course"
     }
   }
 }
