@@ -79,6 +79,19 @@
     },
     "info": {
       "type": "blocks"
+    },
+    "start_date": {
+      "type": "datetime"
+    },
+    "finish_date": {
+      "type": "datetime"
+    },
+    "content": {
+      "type": "blocks",
+      "required": true
+    },
+    "priceUSD": {
+      "type": "decimal"
     }
   }
 }

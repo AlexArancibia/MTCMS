@@ -642,6 +642,10 @@ export interface ApiCourseCourse extends Struct.CollectionTypeSchema {
       'api::certificate.certificate'
     >;
     info: Schema.Attribute.Blocks;
+    start_date: Schema.Attribute.DateTime;
+    finish_date: Schema.Attribute.DateTime;
+    content: Schema.Attribute.Blocks & Schema.Attribute.Required;
+    priceUSD: Schema.Attribute.Decimal;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -678,7 +682,6 @@ export interface ApiTeacherTeacher extends Struct.CollectionTypeSchema {
       Schema.Attribute.DefaultTo<'Peru'>;
     photo: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
     linkedin: Schema.Attribute.String;
-    email: Schema.Attribute.String;
     courses: Schema.Attribute.Relation<'oneToMany', 'api::course.course'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;

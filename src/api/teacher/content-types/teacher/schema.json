@@ -47,9 +47,6 @@
     "linkedin": {
       "type": "string"
     },
-    "email": {
-      "type": "string"
-    },
     "courses": {
       "type": "relation",
       "relation": "oneToMany",
