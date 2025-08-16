@@ -336,112 +336,6 @@ export interface PluginReviewWorkflowsWorkflowStage
   };
 }
 
-export interface PluginMuxVideoUploaderMuxAsset
-  extends Struct.CollectionTypeSchema {
-  collectionName: 'muxassets';
-  info: {
-    description: 'Represents a Mux Asset item, including upload and playback details';
-    displayName: 'Mux Asset';
-    singularName: 'mux-asset';
-    pluralName: 'mux-assets';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  pluginOptions: {
-    'content-manager': {
-      visible: true;
-    };
-    'content-type-builder': {
-      visible: true;
-    };
-  };
-  attributes: {
-    title: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.Configurable &
-      Schema.Attribute.SetMinMaxLength<{
-        minLength: 3;
-        maxLength: 255;
-      }>;
-    upload_id: Schema.Attribute.String &
-      Schema.Attribute.SetMinMaxLength<{
-        maxLength: 255;
-      }>;
-    asset_id: Schema.Attribute.String &
-      Schema.Attribute.SetMinMaxLength<{
-        maxLength: 255;
-      }>;
-    playback_id: Schema.Attribute.String &
-      Schema.Attribute.SetMinMaxLength<{
-        maxLength: 255;
-      }>;
-    signed: Schema.Attribute.Boolean &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<false>;
-    error_message: Schema.Attribute.String &
-      Schema.Attribute.SetMinMaxLength<{
-        maxLength: 255;
-      }>;
-    isReady: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
-    duration: Schema.Attribute.Decimal;
-    aspect_ratio: Schema.Attribute.String;
-    asset_data: Schema.Attribute.JSON;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'plugin::mux-video-uploader.mux-asset'
-    >;
-  };
-}
-
-export interface PluginMuxVideoUploaderMuxTextTrack
-  extends Struct.CollectionTypeSchema {
-  collectionName: 'muxtexttracks';
-  info: {
-    description: 'Temporary storage for user-defined subtitles & captions sent to Mux during video uploads';
-    displayName: 'Mux Text Track';
-    singularName: 'mux-text-track';
-    pluralName: 'mux-text-tracks';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  pluginOptions: {
-    'content-manager': {
-      visible: false;
-    };
-    'content-type-builder': {
-      visible: false;
-    };
-  };
-  attributes: {
-    name: Schema.Attribute.String & Schema.Attribute.Required;
-    language_code: Schema.Attribute.String & Schema.Attribute.Required;
-    closed_captions: Schema.Attribute.Boolean & Schema.Attribute.Required;
-    file: Schema.Attribute.JSON & Schema.Attribute.Required;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'plugin::mux-video-uploader.mux-text-track'
-    >;
-  };
-}
-
 export interface PluginUsersPermissionsPermission
   extends Struct.CollectionTypeSchema {
   collectionName: 'up_permissions';
@@ -615,7 +509,8 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
     courses: Schema.Attribute.Relation<'oneToMany', 'api::course.course'>;
-    course_img: Schema.Attribute.Media<'images' | 'files'>;
+    category_img: Schema.Attribute.Media<'images' | 'files'>;
+    slug: Schema.Attribute.UID<'name'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -637,6 +532,7 @@ export interface ApiCertificateCertificate extends Struct.CollectionTypeSchema {
     singularName: 'certificate';
     pluralName: 'certificates';
     displayName: 'Certificate';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -649,6 +545,7 @@ export interface ApiCertificateCertificate extends Struct.CollectionTypeSchema {
     >;
     finished_date: Schema.Attribute.Date;
     qualification: Schema.Attribute.Integer;
+    certificateCode: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -693,10 +590,6 @@ export interface ApiChapterChapter extends Struct.CollectionTypeSchema {
     quiz: Schema.Attribute.Component<'quiz.quiz', false>;
     chapterSlug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
     shortdescription: Schema.Attribute.String & Schema.Attribute.Required;
-    recorded_video: Schema.Attribute.Relation<
-      'oneToOne',
-      'plugin::mux-video-uploader.mux-asset'
-    >;
     liveSessionUrl: Schema.Attribute.String;
     platform: Schema.Attribute.Enumeration<['Webex', 'Cisco', 'Zoom', 'Meet']>;
     createdAt: Schema.Attribute.DateTime;
@@ -1211,8 +1104,6 @@ declare module '@strapi/strapi' {
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::review-workflows.workflow': PluginReviewWorkflowsWorkflow;
       'plugin::review-workflows.workflow-stage': PluginReviewWorkflowsWorkflowStage;
-      'plugin::mux-video-uploader.mux-asset': PluginMuxVideoUploaderMuxAsset;
-      'plugin::mux-video-uploader.mux-text-track': PluginMuxVideoUploaderMuxTextTrack;
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;

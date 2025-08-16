@@ -11,7 +11,7 @@
     "deploy": "strapi deploy"
   },
   "devDependencies": {
-    "@types/node": "^20",
+    "@types/node": "^20.19.11",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "typescript": "^5"
@@ -25,7 +25,6 @@
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.0.0",
-    "strapi-plugin-mux-video-uploader": "^3.0.1",
     "styled-components": "^6.0.0"
   },
   "author": {

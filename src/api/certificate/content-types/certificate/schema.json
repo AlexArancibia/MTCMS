@@ -4,7 +4,8 @@
   "info": {
     "singularName": "certificate",
     "pluralName": "certificates",
-    "displayName": "Certificate"
+    "displayName": "Certificate",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -29,6 +30,9 @@
     },
     "qualification": {
       "type": "integer"
+    },
+    "certificateCode": {
+      "type": "string"
     }
   }
 }

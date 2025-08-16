@@ -5,6 +5,7 @@
     "lib": [
       "ES2020"
     ],
+    "types": ["node"],
     "target": "ES2019",
     "strict": false,
     "skipLibCheck": true,
@@ -15,12 +16,12 @@
     "noEmitOnError": true,
     "noImplicitThis": true,
     "outDir": "./dist",  // Asegúrate de que el directorio de salida sea correcto
-    "rootDir": "./src"   // Apuntar al directorio de tu código fuente
   },
   "include": [
     "src/**/*.ts",       // Solo incluir archivos .ts en la carpeta src
     "src/**/*.js",       // Incluir archivos JavaScript si es necesario
-    "src/**/*.json"      // Incluir archivos JSON si es necesario
+    "src/**/*.json",      // Incluir archivos JSON si es necesario
+    "config/**/*.ts"     // Incluir archivos de configuración
   ],
   "exclude": [
     "node_modules/",

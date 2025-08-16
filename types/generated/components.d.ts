@@ -90,10 +90,6 @@ export interface ChapterRecordedVideo extends Struct.ComponentSchema {
   };
   attributes: {
     title: Schema.Attribute.String;
-    mux_video_uploader_mux_asset: Schema.Attribute.Relation<
-      'oneToOne',
-      'plugin::mux-video-uploader.mux-asset'
-    >;
   };
 }
 

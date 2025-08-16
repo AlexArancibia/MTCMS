@@ -9,11 +9,7 @@
   "attributes": {
     "title": {
       "type": "string"
-    },
-    "mux_video_uploader_mux_asset": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "plugin::mux-video-uploader.mux-asset"
     }
+
   }
 }
