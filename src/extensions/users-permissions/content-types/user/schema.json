@@ -82,6 +82,10 @@
       "relation": "oneToOne",
       "target": "api::certificate.certificate",
       "mappedBy": "users_permissions_user"
+    },
+    "isTeacher": {
+      "type": "boolean",
+      "default": false
     }
   }
 }

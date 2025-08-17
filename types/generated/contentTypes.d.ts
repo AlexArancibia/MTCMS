@@ -478,6 +478,7 @@ export interface PluginUsersPermissionsUser
       'oneToOne',
       'api::certificate.certificate'
     >;
+    isTeacher: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -724,6 +725,7 @@ export interface ApiTeacherTeacher extends Struct.CollectionTypeSchema {
     photo: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
     linkedin: Schema.Attribute.String;
     courses: Schema.Attribute.Relation<'oneToMany', 'api::course.course'>;
+    email: Schema.Attribute.Email;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;

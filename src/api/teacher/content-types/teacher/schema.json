@@ -52,6 +52,9 @@
       "relation": "oneToMany",
       "target": "api::course.course",
       "mappedBy": "teacher"
+    },
+    "email": {
+      "type": "email"
     }
   }
 }
