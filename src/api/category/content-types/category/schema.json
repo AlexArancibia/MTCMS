@@ -38,6 +38,16 @@
     },
     "description": {
       "type": "string"
+    },
+    "certificate_img": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }

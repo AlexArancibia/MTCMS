@@ -512,6 +512,9 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
     category_img: Schema.Attribute.Media<'images' | 'files'>;
     slug: Schema.Attribute.UID<'name'>;
     description: Schema.Attribute.String;
+    certificate_img: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
