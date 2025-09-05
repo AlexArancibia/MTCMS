@@ -500,6 +500,7 @@ export interface ApiCardSectionCardSection extends Struct.CollectionTypeSchema {
     singularName: 'card-section';
     pluralName: 'card-sections';
     displayName: 'CardSection';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -516,6 +517,7 @@ export interface ApiCardSectionCardSection extends Struct.CollectionTypeSchema {
     background: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios'
     >;
+    card: Schema.Attribute.Component<'content.card', true>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;

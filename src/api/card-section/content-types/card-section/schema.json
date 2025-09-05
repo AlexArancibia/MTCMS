@@ -4,7 +4,8 @@
   "info": {
     "singularName": "card-section",
     "pluralName": "card-sections",
-    "displayName": "CardSection"
+    "displayName": "CardSection",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -27,24 +28,32 @@
       "type": "string"
     },
     "mobileBackground": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     },
     "background": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
+    },
+    "card": {
+      "displayName": "card",
+      "type": "component",
+      "repeatable": true,
+      "component": "content.card"
     }
   }
 }
