@@ -1,10 +1,10 @@
 {
-  "kind": "singleType",
-  "collectionName": "hero_sections",
+  "kind": "collectionType",
+  "collectionName": "card_sections",
   "info": {
-    "singularName": "hero-section",
-    "pluralName": "hero-sections",
-    "displayName": "HeroSection"
+    "singularName": "card-section",
+    "pluralName": "card-sections",
+    "displayName": "CardSection"
   },
   "options": {
     "draftAndPublish": true
@@ -20,13 +20,13 @@
     "description": {
       "type": "string"
     },
-    "button": {
+    "buttonText": {
       "type": "string"
     },
     "buttonLink": {
       "type": "string"
     },
-    "background": {
+    "mobileBackground": {
       "allowedTypes": [
         "images",
         "files",
@@ -36,7 +36,7 @@
       "type": "media",
       "multiple": false
     },
-    "mobileBackground": {
+    "background": {
       "allowedTypes": [
         "images",
         "files",

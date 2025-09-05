@@ -494,6 +494,43 @@ export interface PluginUsersPermissionsUser
   };
 }
 
+export interface ApiCardSectionCardSection extends Struct.CollectionTypeSchema {
+  collectionName: 'card_sections';
+  info: {
+    singularName: 'card-section';
+    pluralName: 'card-sections';
+    displayName: 'CardSection';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Schema.Attribute.String;
+    subtitle: Schema.Attribute.String;
+    description: Schema.Attribute.String;
+    buttonText: Schema.Attribute.String;
+    buttonLink: Schema.Attribute.String;
+    mobileBackground: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    background: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::card-section.card-section'
+    >;
+  };
+}
+
 export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
   collectionName: 'categories';
   info: {
@@ -663,28 +700,25 @@ export interface ApiCourseCourse extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiHeroSectionHeroSection extends Struct.SingleTypeSchema {
-  collectionName: 'hero_sections';
+export interface ApiInfoInfo extends Struct.SingleTypeSchema {
+  collectionName: 'infos';
   info: {
-    singularName: 'hero-section';
-    pluralName: 'hero-sections';
-    displayName: 'HeroSection';
+    singularName: 'info';
+    pluralName: 'infos';
+    displayName: 'Info';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    title: Schema.Attribute.String;
-    subtitle: Schema.Attribute.String;
-    description: Schema.Attribute.String;
-    button: Schema.Attribute.String;
-    buttonLink: Schema.Attribute.String;
-    background: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios'
-    >;
-    mobileBackground: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios'
-    >;
+    address: Schema.Attribute.String;
+    email: Schema.Attribute.Email;
+    phone: Schema.Attribute.BigInteger;
+    Facebook: Schema.Attribute.String;
+    instagram: Schema.Attribute.String;
+    linkedin: Schema.Attribute.String;
+    YouTube: Schema.Attribute.String;
+    TikTok: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -693,10 +727,7 @@ export interface ApiHeroSectionHeroSection extends Struct.SingleTypeSchema {
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::hero-section.hero-section'
-    >;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::info.info'>;
   };
 }
 
@@ -1153,11 +1184,12 @@ declare module '@strapi/strapi' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::card-section.card-section': ApiCardSectionCardSection;
       'api::category.category': ApiCategoryCategory;
       'api::certificate.certificate': ApiCertificateCertificate;
       'api::chapter.chapter': ApiChapterChapter;
       'api::course.course': ApiCourseCourse;
-      'api::hero-section.hero-section': ApiHeroSectionHeroSection;
+      'api::info.info': ApiInfoInfo;
       'api::teacher.teacher': ApiTeacherTeacher;
       'api::user-progress.user-progress': ApiUserProgressUserProgress;
       'admin::permission': AdminPermission;
